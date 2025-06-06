@@ -18,23 +18,6 @@ vector<string> getFileNames() {
     return filenames;
 }
 
-void testPopulateLine() {
-    cout<<"Testing populateLine()"<<endl;
-    vector<string> filenames = getFileNames();
-    int expectedTotalStops[] = {44, 21, 25, 6, 29,38, 62};
-    for (int i = 0; i < filenames.size(); i++) {
-        string lineName = filenames[i].substr(0, filenames[i].length() - 4);
-        MetroLine* metroLine = new MetroLine(lineName);
-        metroLine->populateLine(filenames[i]);
-        lines.push_back(metroLine);
-        cout << "Line name: " << metroLine->getLineName() << endl;
-        cout << "Total stops: " << metroLine->getTotalStops() << endl;
-        cout << endl;
-        assert(metroLine->getTotalStops() == expectedTotalStops[i]);
-        metroLine->printLine();
-    }
-}
-
 void testPopulateTree() {
     cout<<"Testing populateTree()"<<endl;
     vector<string> filenames = getFileNames();
@@ -50,6 +33,23 @@ void testPopulateTree() {
     cout << "Total nodes in tree: " << tree->getTotalNodes(tree->getRoot()) << endl;
     assert(tree->height(tree->getRoot()) == 9);
     assert(tree->getTotalNodes(tree->getRoot()) == 210);
+}
+
+void testPopulateLine() {
+    cout<<"Testing populateLine()"<<endl;
+    vector<string> filenames = getFileNames();
+    int expectedTotalStops[] = {44, 21, 25, 6, 29,38, 62};
+    for (int i = 0; i < filenames.size(); i++) {
+        string lineName = filenames[i].substr(0, filenames[i].length() - 4);
+        MetroLine* metroLine = new MetroLine(lineName);
+        metroLine->populateLine(filenames[i]);
+        lines.push_back(metroLine);
+        cout << "Line name: " << metroLine->getLineName() << endl;
+        cout << "Total stops: " << metroLine->getTotalStops() << endl;
+        cout << endl;
+        assert(metroLine->getTotalStops() == expectedTotalStops[i]);
+        metroLine->printLine();
+    }
 }
 
 vector<string> getExpectedPath() {
